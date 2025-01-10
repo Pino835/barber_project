@@ -1,0 +1,25 @@
+# Entornos virtuales
+env/
+venv/
+
+# Archivos Python compilados
+*.pyc
+__pycache__/
+
+# Configuración local
+*.env
+
+# Archivos estáticos y de medios (opcional)
+static/
+media/
+
+# Archivos de migraciones (opcional)
+*/migrations/
+
+# Archivos de configuración de IDE
+.vscode/
+.idea/
+
+# Archivos del sistema operativo
+.DS_Store
+Thumbs.db
