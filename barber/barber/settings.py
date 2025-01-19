@@ -58,7 +58,9 @@ ROOT_URLCONF = 'barber.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [
+            BASE_DIR / 'templates',  # Esto para los templates globales
+        ],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
