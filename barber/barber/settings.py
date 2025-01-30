@@ -124,7 +124,9 @@ USE_TZ = True
 STATIC_URL = 'static/'
 
 STATICFILES_DIRS = [
-    BASE_DIR / 'static',  # Apunta a la carpeta estática
+    BASE_DIR / 'static',
+    BASE_DIR / "admin_panel/static",  
+    BASE_DIR / "client_panel/static", # Apunta a la carpeta estática
 ]
 
 # Default primary key field type

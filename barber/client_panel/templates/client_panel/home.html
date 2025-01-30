@@ -1,9 +1,29 @@
+{% load static %}
 <!DOCTYPE html>
 <html>
     <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">  
         <title>Bienvenido</title>
+        <link rel="stylesheet" href="{% static 'client_panel/home.css' %}">
+        <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
     </head>
     <body>
-        <h1>Bienvenido al Sitio Web de la Barbería</h1>
+        <header class="client-header">
+            <h1>Dashboard</h1>
+            <nav>
+                <ul class="nav-list">
+                <li><a href="">Home</a></li>
+                <li><a href="">Appointments</a></li>
+                <li><a href="">Services</a></li>
+                <li><a href="">Clients</a></li>
+                <li><a href="">Accounts</a></li>
+                <li><a href="">Inventory</a></li>
+                <li><a href="">Profile</a></li>
+                </ul>
+            </nav>
+        </header>
+
+        <h1>Welcome</h1>
     </body>
 </html>
