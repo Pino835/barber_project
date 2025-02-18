@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
+from django.contrib.auth.views import PasswordResetView
 
 def login_view(request):
     if request.method == 'POST':
@@ -24,3 +25,6 @@ def login_view(request):
 def logout_view(request):
     logout(request)
     return redirect('login')
+
+class CustomPasswordResetView(PasswordResetView):
+    template_name = 'password_reset.html'
