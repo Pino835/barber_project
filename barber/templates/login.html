@@ -1,14 +1,14 @@
+{% extends 'base.html' %}
+
 {% load static %}
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login Page</title>
+
+{% block title %}Login Page{% endblock %}
+
+{% block extra_css %}
     <link rel="stylesheet" href="{% static 'css/login.css' %}">
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
-</head>
-<body>
+{% endblock %}
+
+{% block content %}
 
     <div class="login-container">
         <h1>Welcome</h1>
@@ -31,5 +31,4 @@
         <a href="#">You're New? Sign Up</a>
     </div>
 
-</body>
-</html>
+{% endblock %}
