@@ -1,11 +1,13 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
+from .forms import CustomUserCreationForm
+from client_panel.models import ClientProfile  # Importamos el modelo del perfil
 from django.contrib.auth.views import (
     PasswordResetView, 
     PasswordResetDoneView, 
     PasswordResetConfirmView, 
-    PasswordResetCompleteView
+    PasswordResetCompleteView,
 )
 
 def login_view(request):
@@ -30,6 +32,25 @@ def login_view(request):
 def logout_view(request):
     logout(request)
     return redirect('login')
+
+def register(request):
+    if request.method == "POST":
+        form = CustomUserCreationForm(request.POST)
+        if form.is_valid():
+            user = form.save()  # Guarda el usuario
+
+            # Crear el perfil del cliente
+            phone_number = form.cleaned_data.get("phone_number")
+            address = form.cleaned_data.get("address")
+
+            ClientProfile.objects.create(user=user, phone_number=phone_number, address=address)
+
+            login(request, user)  # Inicia sesión automáticamente
+            return redirect("home")  # Cambia esto por tu página de inicio
+    else:
+        form = CustomUserCreationForm()
+    
+    return render(request, "user.html", {"form": form})
 
 class CustomPasswordResetView(PasswordResetView):
     template_name = 'password_reset.html'

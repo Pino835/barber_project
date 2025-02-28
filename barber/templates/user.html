@@ -1,0 +1,53 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block title %}Create Account{% endblock %}
+
+{% block extra_css %}
+    <link rel="stylesheet" href="{% static 'css/user.css' %}">
+{% endblock %}
+
+{% block content %}
+
+    <div class="user-container">
+        <h1>Create Account</h1>
+
+        <form method="post">
+            {% csrf_token %}
+            
+            <label for="id_username">Username:</label>
+            {{ form.username }}
+            
+            <label for="id_email">Email:</label>
+            {{ form.email }}
+
+            <label for="id_phone_number">Phone Number:</label>
+            {{ form.phone_number }}
+
+            <label for="id_password1">Password:</label>
+            {{ form.password1 }}
+
+            <label for="id_password2">Confirm Password:</label>
+            {{ form.password2 }}
+
+            <button type="submit">Register</button>
+        </form>
+
+        {% if form.errors %}
+            <div class="error-messages">
+                <ul>
+                    {% for field, errors in form.errors.items %}
+                        {% for error in errors %}
+                            <li>{{ field|title }}: {{ error }}</li>
+                        {% endfor %}
+                    {% endfor %}
+                </ul>
+            </div>
+        {% endif %}
+
+        <p>Already have an account? <a href="{% url 'login' %}">Login here</a></p>
+
+    </div>
+
+{% endblock %}
