@@ -25,9 +25,9 @@ def login_view(request):
             elif user.groups.filter(name='Client').exists():
                 return redirect('client_home')  # Cambia por la URL del panel de cliente
             else:
-                messages.error(request, 'No tienes permisos asignados.')
+                messages.error(request, 'No permits assigned.')
         else:
-            messages.error(request, 'Usuario o contraseña incorrectos.')
+            messages.error(request, 'Wrong credentials.')
     return render(request, 'login.html')
 
 def logout_view(request):

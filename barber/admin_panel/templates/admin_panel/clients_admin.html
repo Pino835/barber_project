@@ -1,0 +1,49 @@
+{% extends 'admin_panel/admin_base.html' %}
+
+{% load static %}
+
+{% block title %}Clients{% endblock %}
+
+{% block extra_css %}
+    <link rel="stylesheet" href="{% static 'admin_panel/clients_admin.css' %}">
+{% endblock %}
+
+{% block content %}
+
+    <h1 class="title">Clients</h1>
+
+    <div id="service-container">
+
+        <button>New</button>
+
+        <table border="1">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Email</th>
+                    <th>Phone</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for client in clients %}
+                <tr>
+                    <td>{{ client.user.username }}</td>
+                    <td>{{ client.user.email }}</td>
+                    <td>{{ client.phone_number }}</td>
+                    <td>
+                        <button>Edit</button>
+                        <button>Delete</button>
+                    </td>
+                </tr>
+                {% empty %}
+                <tr>
+                    <td colspan="4">No clients</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+
+    </div>
+
+{% endblock %}

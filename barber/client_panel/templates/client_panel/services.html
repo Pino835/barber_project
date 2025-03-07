@@ -1,0 +1,40 @@
+{% extends 'client_panel/client_base.html' %}
+
+{% load static %}
+
+{% block title %}Services{% endblock %}
+
+{% block extra_css %}
+    <link rel="stylesheet" href="{% static 'client_panel/services_admin.css' %}">
+{% endblock %}
+
+{% block content %}
+
+    <h1 class="title">Services</h1>
+
+    <div id="service-container">
+
+        <table border="1">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Price</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for service in services %}
+                <tr>
+                    <td>{{ service.name }}</td>
+                    <td>{{ service.price }}</td>
+                </tr>
+                {% empty %}
+                <tr>
+                    <td colspan="4">No services</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+
+    </div>
+
+{% endblock %}

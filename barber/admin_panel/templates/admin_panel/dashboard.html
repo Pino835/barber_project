@@ -1,121 +1,15 @@
-{% load static %}
-<!DOCTYPE html>
-<html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Barber's Panel</title>
-    <link rel="stylesheet" href="{% static 'admin_panel/dashboard.css' %}">
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
-</head>
-<body>
+{% extends 'admin_panel/admin_base.html' %}
 
-    <header class="admin-header">
-        <h1>Dashboard</h1>
-        <nav>
-            <ul class="nav-list">
-                <li><a href="{% url 'admin_dashboard' %}">Home</a></li>
-                <li><a href="#appointments">Appointments</a></li>
-                <li><a href="#services">Services</a></li>
-                <li><a href="#clients">Clients</a></li>
-                <li><a href="#">Accounts</a></li>
-                <li class="dropdown">
-                    <a href="#" class="dropbtn">Profile ▾</a>
-                    <div class="dropdown-content">
-                        <a href="#">Settings</a>
-                        <a href="{% url 'logout' %}">Logout</a>
-                    </div>
-                </li>
-            </ul>
-        </nav>
-    </header>
+{% load static %}
+
+{% block title %}Barber's Panel{% endblock %}
+
+{% block extra_css %}
+    <link rel="stylesheet" href="{% static 'admin_panel/dashboard.css' %}">
+{% endblock %}
+
+{% block content %}
 
     <h1 class="title">Welcome to Barber's Panel</h1>
 
-    <div id="appoint-container">
-
-        <h2 id="appointments">Appointments</h2>
-
-        <table border="1">
-            <thead>
-                <tr>
-                    <th>Client</th>
-                    <th>Service</th>
-                    <th>Data</th>
-                </tr>
-            </thead>
-            <tbody>
-                {% for appointment in appointments %}
-                <tr>
-                    <td>{{ appointment.client.username }}</td>
-                    <td>{{ appointment.service }}</td>
-                    <td>{{ appointment.date }}</td>
-                </tr>
-                {% empty %}
-                <tr>
-                    <td colspan="4">No appointments</td>
-                </tr>
-                {% endfor %}
-            </tbody>
-        </table>
-
-    </div>
-
-    <div id="service-container">
-
-        <h2 id="services">Services</h2>
-
-        <table border="1">
-            <thead>
-                <tr>
-                    <th>Name</th>
-                    <th>Price</th>
-                </tr>
-            </thead>
-            <tbody>
-                {% for service in services %}
-                <tr>
-                    <td>{{ service.name }}</td>
-                    <td>{{ service.price }}</td>
-                </tr>
-                {% empty %}
-                <tr>
-                    <td colspan="4">No services</td>
-                </tr>
-                {% endfor %}
-            </tbody>
-        </table>
-
-    </div>
-
-    <div id="client-container">
-
-        <h2 id="clients">Clients</h2>
-
-        <table border="1">
-            <thead>
-                <tr>
-                    <th>Client</th>
-                    <th>Phone</th>
-                    <th>Email</th>
-                </tr>
-            </thead>
-            <tbody>
-                {% for client in clients %}
-                <tr>
-                    <td>{{ client.user.username }}</td>
-                    <td>{{ client.phone_number }}</td>
-                    <td>{{ client.user.email }}</td>
-                </tr>
-                {% empty %}
-                <tr>
-                    <td colspan="4">No clients</td>
-                </tr>
-                {% endfor %}
-            </tbody>
-        </table>
-
-    </div>
-
-</body>
-</html>
+{% endblock %}

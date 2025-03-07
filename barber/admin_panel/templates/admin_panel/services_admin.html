@@ -1,0 +1,47 @@
+{% extends 'admin_panel/admin_base.html' %}
+
+{% load static %}
+
+{% block title %}Services{% endblock %}
+
+{% block extra_css %}
+    <link rel="stylesheet" href="{% static 'admin_panel/services_admin.css' %}">
+{% endblock %}
+
+{% block content %}
+
+    <h1 class="title">Services</h1>
+
+    <div id="service-container">
+
+        <button>New</button>
+
+        <table border="1">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Price</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for service in services %}
+                <tr>
+                    <td>{{ service.name }}</td>
+                    <td>{{ service.price }}</td>
+                    <td>
+                        <button>Edit</button>
+                        <button>Delete</button>
+                    </td>
+                </tr>
+                {% empty %}
+                <tr>
+                    <td colspan="4">No services</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+
+    </div>
+
+{% endblock %}

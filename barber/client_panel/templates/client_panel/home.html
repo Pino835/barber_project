@@ -1,34 +1,15 @@
+{% extends 'client_panel/client_base.html' %}
+
 {% load static %}
-<!DOCTYPE html>
-<html>
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">  
-        <title>Bienvenido</title>
-        <link rel="stylesheet" href="{% static 'client_panel/home.css' %}">
-        <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
-    </head>
-    <body>
 
-        <header class="client-header">
-            <h1>Dashboard</h1>
-            <nav>
-                <ul class="nav-list">
-                    <li><a href="{% url 'client_home' %}">Home</a></li>
-                    <li><a href="#">Services</a></li>
-                    <li><a href="#">Appointments</a></li>
-                    <li><a href="#">Contacts</a></li>
-                    <li class="dropdown">
-                        <a href="#" class="dropbtn">Profile ▾</a>
-                        <div class="dropdown-content">
-                            <a href="#">Settings</a>
-                            <a href="{% url 'logout' %}">Logout</a>
-                        </div>
-                    </li>
-                </ul>
-            </nav>
-        </header>
+{% block title %}Welcome{% endblock %}
 
-        <h1>Welcome</h1>
-    </body>
-</html>
+{% block extra_css %}
+    <link rel="stylesheet" href="{% static 'client_panel/home.css' %}">
+{% endblock %}
+
+{% block content %}
+
+    <h1 class="title">Welcome</h1>
+
+{% endblock %}
