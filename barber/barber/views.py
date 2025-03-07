@@ -3,6 +3,7 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
 from .forms import CustomUserCreationForm
 from client_panel.models import ClientProfile  # Importamos el modelo del perfil
+from django.contrib.auth.models import Group
 from django.contrib.auth.views import (
     PasswordResetView, 
     PasswordResetDoneView, 
@@ -39,14 +40,17 @@ def register(request):
         if form.is_valid():
             user = form.save()  # Guarda el usuario
 
-            # Crear el perfil del cliente
-            phone_number = form.cleaned_data.get("phone_number")
-            address = form.cleaned_data.get("address")
+            # Asignar el grupo "Client" al usuario recién creado
+            group = Group.objects.get(name="Client")  # Asegúrate de que el nombre coincide con el creado en el admin
+            user.groups.add(group)
 
-            ClientProfile.objects.create(user=user, phone_number=phone_number, address=address)
+            # Crear el perfil del cliente
+            if not ClientProfile.objects.filter(user=user).exists():
+                phone_number = form.cleaned_data.get("phone_number")
+                ClientProfile.objects.create(user=user, phone_number=phone_number)
 
             login(request, user)  # Inicia sesión automáticamente
-            return redirect("home")  # Cambia esto por tu página de inicio
+            return redirect("client_home")  # Cambia esto por tu página de inicio
     else:
         form = CustomUserCreationForm()
     
