@@ -1,0 +1,33 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'css/base.css' %}">
+    {% block styles %}{% endblock %}
+    <title>{% block title %}{% endblock %}</title>
+</head>
+<body>
+
+    <header>
+        <h1>BARBERIA XYZ</h1>
+        {% if request.path not in '/login/ /register/ /logout/' %}
+            <nav>
+                <a href="{% url 'logout' %}">SALIR</a>
+            </nav>
+        {% endif %}
+    </header>
+
+    <div>
+        {% block content %}
+        <!-- El contenido de cada página individual se insertará aquí -->
+        {% endblock %}
+    </div>
+
+    <footer>
+        <p>&copy; 2025 | Barbería</p>
+    </footer>
+
+</body>
+</html>

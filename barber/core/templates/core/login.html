@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block styles %}
+    <link rel="stylesheet" href="{% static 'css/login.css' %}">
+{% endblock %}
+
+{% block content %}
+
+    <div class="login-container">
+        <h2>Iniciar Sesion</h2>
+        <form method="POST">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit">Ingresar</button></br>
+        </form></br>
+        <a href="#">Olvidó su contraseña?</a></br>
+        <a href="{% url 'register' %}">Registrarse</a>
+    </div>
+
+
+{% endblock %}
