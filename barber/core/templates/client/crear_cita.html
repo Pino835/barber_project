@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block styles %}
+    <link rel="stylesheet" href="{% static 'css/crear_cita.css' %}">
+{% endblock %}
+
+{% block content %}
+    
+    <div class="cita-container">
+        <h2>Crear Cita</h2>
+        <form method="POST">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit">Crear</button>
+        </form>
+    </div>
+
+{% endblock %}

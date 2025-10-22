@@ -1,9 +1,42 @@
 {% extends "base.html" %}
 {% load static %}
 
+{% block styles %}
+    <link rel="stylesheet" href="{% static 'css/admin_home.css' %}">
+{% endblock %}
+
 {% block content %}
     <h2>BIENVENIDO ADMIN {{admin.username}}</h2>
     
     <h2>TUS CITAS AGENDADAS</h2>
+
+    <div class="table">
+        {% if citas %}
+        <table border="1" cellspacing="0" cellpadding="8">
+            <thead>
+                <tr>
+                    <th>Cliente</th>
+                    <th>Fecha</th>
+                    <th>Hora</th>
+                    <th>Motivo</th>
+                    <th>Estado</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for cita in citas %}
+                <tr>
+                    <td>{{ cita.cliente.username }}</td>
+                    <td>{{ cita.fecha }}</td>
+                    <td>{{ cita.hora }}</td>
+                    <td>{{ cita.motivo }}</td>
+                    <td>{{ cita.estado|capfirst }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        {% else %}
+        <p>No hay citas registradas.</p>
+        {% endif %}
+    </div>
 
 {% endblock %}

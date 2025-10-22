@@ -1,10 +1,10 @@
 from django.contrib.auth import authenticate, login, logout
 from django.shortcuts import render, redirect, get_object_or_404
-from .forms import UserRegisterForm, UserLoginForm
+from .forms import UserRegisterForm, UserLoginForm, CitaForm
 from django.contrib import messages
 from django.contrib.auth.models import User
+from .models import Cita
 
-#Vista para Registrar un Nuevo Usuario
 def register_view(request):
     if request.method == 'POST':
         form = UserRegisterForm(request.POST)
@@ -47,11 +47,29 @@ def logout_view(request):
     logout(request)
     return redirect('login') 
 
+#ADMIN
+
 def admin_view(request, username):
     admin = get_object_or_404(User, username=username)
-    return render(request, 'admin/home.html', {'admin':admin})
+    citas = Cita.objects.all()
+    return render(request, 'admin/home.html', {'admin':admin, 'citas': citas})
 
+#CLIENTE
 
 def client_view(request, username):
     client = get_object_or_404(User, username=username)
-    return render(request, 'client/home.html', {'client':client})
+    citas = Cita.objects.filter(cliente=request.user)
+    return render(request, 'client/home.html', {'client':client, 'citas': citas})
+
+def crear_cita_view(request, username):
+    if request.method == 'POST':
+        form = CitaForm(request.POST)
+        if form.is_valid():
+            cita = form.save(commit=False)
+            cita.cliente = request.user
+            cita.save()
+            return redirect('client_view', username)
+    else:
+        form = CitaForm()
+    return render(request, 'client/crear_cita.html', {'form': form})
+
