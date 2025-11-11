@@ -11,8 +11,9 @@ header {
     background-color: black;
     color: white;
     padding: 10px 20px;
-    display: flex; 
-    justify-content: space-between; 
+    display: flex;
+    justify-content: space-between;
+    align-items: center; /* 👈 centra verticalmente */
 }
 
 nav a { 

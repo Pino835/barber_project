@@ -14,6 +14,7 @@
         <h1>BARBERIA XYZ</h1>
         {% if request.path not in '/login/ /register/ /logout/' %}
             <nav>
+                <a href="{% url 'profile' request.user.username %}">PERFIL</a>
                 <a href="{% url 'logout' %}">SALIR</a>
             </nav>
         {% endif %}
@@ -26,7 +27,7 @@
     </div>
 
     <footer>
-        <p>&copy; 2025 | Barbería</p>
+        <p>&copy; 2025 | Barbería XYZ</p>
     </footer>
 
 </body>

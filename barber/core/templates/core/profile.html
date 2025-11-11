@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}
+    Perfil de {{ user.username }}
+{% endblock %}
+
+{% block styles %}
+    <link rel="stylesheet" href="{% static 'css/profile.css' %}">
+{% endblock %}
+
+{% block content %}
+
+    <div class="profile-container">
+        <h2>Perfil</h2>
+        <div class="profile-details">
+            <p><strong>Nombre de usuario:</strong> {{ user.username }}</p>
+            <p><strong>Correo electrónico:</strong> {{ user.email }}</p>
+            <!-- Agrega más detalles del perfil según sea necesario -->
+        
+    </div>
+
+{% endblock %}

@@ -1,6 +1,10 @@
 {% extends "base.html" %}
 {% load static %}
 
+{% block title %}
+    Iniciar Sesion
+{% endblock %}
+
 {% block styles %}
     <link rel="stylesheet" href="{% static 'css/login.css' %}">
 {% endblock %}
@@ -17,6 +21,5 @@
         <a href="#">Olvidó su contraseña?</a></br>
         <a href="{% url 'register' %}">Registrarse</a>
     </div>
-
 
 {% endblock %}

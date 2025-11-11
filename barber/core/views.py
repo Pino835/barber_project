@@ -47,6 +47,10 @@ def logout_view(request):
     logout(request)
     return redirect('login') 
 
+def profile_view(request, username):
+    user = get_object_or_404(User, username=username)
+    return render(request, 'core/profile.html', {'user':user})
+
 #ADMIN
 
 def admin_view(request, username):
