@@ -56,7 +56,28 @@ def profile_view(request, username):
 def admin_view(request, username):
     admin = get_object_or_404(User, username=username)
     citas = Cita.objects.all()
-    return render(request, 'admin/home.html', {'admin':admin, 'citas': citas})
+    estados = Cita.ESTADOS
+    return render(request, 'admin/home.html', {'admin':admin, 'citas': citas, 'estados': estados})
+
+def update_status(request, username, id):
+    cita = get_object_or_404(Cita, id=id)
+
+    if request.method == 'POST':
+        new_status = request.POST.get('estado')
+        cita.estado = new_status
+        cita.save()
+        return redirect('admin_view', username=username)  # ajusta a tu vista
+
+    return redirect('admin_view', username=username)  # ajusta a tu vista
+
+def delete_cita(request, username, id):
+    cita = get_object_or_404(Cita, id=id)
+    
+    if request.method == 'POST':
+        cita.delete()
+        return redirect('admin_view', username=username)
+
+    return redirect('admin_view', username=username)
 
 #CLIENTE
 

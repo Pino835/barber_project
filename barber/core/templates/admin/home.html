@@ -24,6 +24,7 @@
                     <th>Hora</th>
                     <th>Motivo</th>
                     <th>Estado</th>
+                    <th>Acciones</th>
                 </tr>
             </thead>
             <tbody>
@@ -34,6 +35,15 @@
                     <td>{{ cita.hora }}</td>
                     <td>{{ cita.motivo }}</td>
                     <td>{{ cita.estado|capfirst }}</td>
+                    <td>
+                        <button class="openModalBtn" data-id="{{ cita.id }}" data-estado="{{ cita.estado }}">
+                            Cambiar estado
+                        </button>
+                         |
+                        <button class="deleteBtn" data-id="{{ cita.id }}">
+                                Eliminar
+                        </button>
+                    </td>
                 </tr>
                 {% endfor %}
             </tbody>
@@ -42,5 +52,84 @@
         <p>No hay citas registradas.</p>
         {% endif %}
     </div>
+
+    <div id="edit-modal" class="modal">
+        <div class="modal-content">
+            <span onclick="closeModal()" class="close">&times;</span>
+            <h3>Actualizar estado</h3>
+
+            <form method="POST" id="updateForm">
+                {% csrf_token %}
+
+                <select name="estado" id="estadoSelect">
+                    {% for value, label in estados %}
+                    <option value="{{ value }}">{{ label }}</option>
+                    {% endfor %}
+                </select>
+
+                <br><br>
+
+                <button type="submit">Guardar</button>
+            </form>
+        </div>
+    </div>
+
+    <div id="deleteModal" class="modal">
+        <div class="modal-content">
+            <span onclick="closeDeleteModal()" class="close">&times;</span>
+            <h3>¿Eliminar cita?</h3>
+
+            <form method="POST" id="deleteForm">
+                {% csrf_token %}
+                <p>Esta acción no se puede deshacer.</p>
+                <button type="submit" style="background:red;color:white;">Eliminar</button>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        const modal = document.getElementById("modal");
+        const updateForm = document.getElementById("updateForm");
+        const estadoSelect = document.getElementById("estadoSelect");
+        const username = "{{ request.user.username }}";
+
+        // Abrir modal
+        document.querySelectorAll(".openModalBtn").forEach(btn => {
+            btn.addEventListener("click", () => {
+                const id = btn.dataset.id;
+                const estadoActual = btn.dataset.estado;
+
+                // Setear el estado actual
+                estadoSelect.value = estadoActual;
+
+                // Setear la URL correcta
+                updateForm.action = `/barber_admin/${username}/update_status/${id}/`;
+
+                modal.style.display = "block";
+            });
+        });
+
+        function closeModal() {
+            modal.style.display = "none";
+        }
+
+        const deleteModal = document.getElementById("deleteModal");
+        const deleteForm = document.getElementById("deleteForm");
+
+        document.querySelectorAll(".deleteBtn").forEach(btn => {
+            btn.addEventListener("click", () => {
+                const id = btn.dataset.id;
+                const username = "{{ request.user.username }}";
+
+                deleteForm.action = `/barber_admin/${username}/delete_cita/${id}/`;
+
+                deleteModal.style.display = "block";
+            });
+        });
+
+        function closeDeleteModal() {
+            deleteModal.style.display = "none";
+        }
+    </script>
 
 {% endblock %}
